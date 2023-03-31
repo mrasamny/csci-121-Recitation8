@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -5,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Recitation8Test {
 
     @Test
+    @DisplayName("[1] test lastItemReachable")
     void lastItemReachable() {
         int[] hop1 = {0};
         assertTrue(Recitation8.lastItemReachable(hop1));
@@ -22,6 +24,7 @@ class Recitation8Test {
     }
 
     @Test
+    @DisplayName("[2] test slidingWindowMinTest")
     void slidingWindowMinTest() {
         int[] lst = {2, 8, -3, 5, 4};
 
