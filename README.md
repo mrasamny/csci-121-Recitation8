@@ -1,99 +1,121 @@
-# Recitation 8 - Tic Tac Toe
+# Recitation - You Want LeetCode, You Got LeetCode!
 
-A Tic Tac Toe board is composed of a 3 x 3 square board.  Two players play the 
-game, each having his/her/its game piece.  The traditional game pieces are Xs 
-and Os; however, they do not need to be.  The game begins with player one 
-choosing one of the nine squares.  Once player one chooses, player one's game 
-piece will occupy that square.  Then player two selects one of the remaining 
-squares and places his/her/its game piece in that square.  The selection 
-continues alternating between player one and player two until one of the 
-following occurs:
+## Student Outcomes
 
-1. One of the players has his/her/its game piece on the three horizontal or 
-   vertical squares or along the center diagonal squares.  In that case, 
-   the player whose game pieces satisfy this condition is the winner.
-2. All squares are occupied, and condition 1 is not satisfied.  In that 
-   case, the game ends in a draw.
-   
+After completing this recitation, a student will be able to
 
-In this recitation exercise, you will implement a Tic Tac Toe board in a class 
-called TicTacTac, which will be used in a class called TicTacToeGame.  Since 
-a game consists of game pieces, a class called GamePiece is already implemented. While
-this may seem like a useless class, you need only think about how this can 
-be easily extended, for example, to implement on Greenfoot.
+1. Use arrays to represent a solution to a requirement.
+2. Use loops and nested to loops to implement a solution to a problem.
 
-## The GamePiece Class
-The GamePiece class is a a simple class that uses characters as the basis of the 
-game piece; however, it is straight forward to extend this to, for example, 
-an Actor based game piece in Greenfoot.  Take a look at the class and become
-familiar with its behavior.
+## Task 1 - List Hopping
 
-## The TicTacToe Class
-This is the implementation of the Tic Tac Toe board.  You will be required to implement
-several of the methods in the TicTacToe class.  The underlying array representing the 
-board could have been implemented using a 1-dimensional array of length nine, or a 
-3 x 3 2-dimensional array.  This recitation uses the latter representation.
+You are given a list of integers, where each value of the list represents a hop to the next integer in the list.  Write a program that will determine if there is a hop route to the last position in the list.  A failure is determined by the inability to reach or hop beyond the last position on the list.  
 
-The TicTacToe class declares a field called player, which is an array 
-of two GamePiece type, representing the game pieces of
-player one and two.
+For example, given the following list
 
-```java
-private GamePiece[] player;
 ```
-and defined in the constructor as,
-
-```java
-player = new GamePiece[2];
-player[0] = new GamePiece(p1);
-player[1] = new GamePiece(p2);
-```
-where p1 and p2 are game pieces.  Diagramatically, this may look like,
-
-![GamePiece diagram](playerRepresentation.png)
-
-The TicTacToe class declares a field,
-
-```java
-private GamePiece[][] board;
+3 1 0 1 3
 ```
 
-and defines the array in the constructor as,
+The first entry always represents the starting list position. From the starting list position, the number 3 means hop forward 3 positions in the list.  This results in landing on the number 1 (4th integer in the list). From that position in the list, a hop of 1 will result in landing on the last position in the list. **This represents a success**.
 
-```java
-board = new GamePiece[3][3];
+Now consider a list like:
+
+```
+4 3 2 1 0 2 3
 ```
 
-Digramatically, this will look like,
+Again, start at the first list position and hop forward 4 positions, landing on 0 (5th integer in the list). From this position the last position cannot be reached because of the 0 hop. **This is a failure**.
 
-![board representation](boardRepresentation.png)
+Consider again the following list,
 
-When a game piece occupies a board position, we will represent this by assigning a reference to 
-one of the game pieces referred to in the `player` array.
+```
+5 3 2 1 0 2 3
+```
 
-So, a board that looks like the following,
+### Implementation
 
-![board example](exampleBoard.png)
+Implement the solution in the `lastItemReachable()` method in the Recitiation10 class.  The method should return a <span style="color:blue;">`true`</span> if the last item in the list is reachable; otherwise the method returns a <span style="color:blue;">`false`</span>.
 
-is represented at runtime in the following diagram.
+For Example:
 
-![board example representation](exampleBoardRep.png)
+```
+Recitation8.lastItemReachable(new int[]{5, 3, 2, 1, 0, 2, 3});
+```
 
-## Submission
+Should result in a <span style="color:blue;">`false`</span>. 
 
-You are required to implement the following methods in the TicTacToe class.
 
-1. isValid()
-2. isEmpty()
-3. movesRemaining()
-4. getPiece()
-6. getCurrentPlayer()
-7. clear()
+```
+Recitation8.lastItemReachable(new int[]{5, 3, 1, 0, 1, 3});
+```
 
-A unit test is provided on which to test these methods.
+Should result in a <span style="color:blue;">`true`</span>.
 
-## Recitation Activities
+### Additional Information
 
-The toString() method and the getWinner() method will be implemented during recitation.  You
-will also be given instructions on how to set up the run configuration to run a complete
-two-person game using the TicTacToeGame class..
++ You do not need to verify the correctness of the input.
++ Assume the array does not contain any negative integers.
++ You do not have to handle exceptions.
+
+
+## Task 2 - Sliding Window
+
+You are tasked with writing a program that will process a list of integers with a specified window size.  The window establishes a sub-list of integers from the list.  As the window slides, a new sub-list of integers appears.  For each sub-list, the program must display the smallest number.  For example, given a window size of 2 and the following list,
+
+```
+12 15 11 7 19 5
+```
+
+The list of integers will be divided into sub-lists of two, and the window will move one position to the right. The smallest integer for each sub-list is displayed. The list of smallest integers would be:
+
+```
+12 11 7 7 5
+```
+
+The result was obtained as follows. 
+
+1. The initial sub-list, given the window size of 2, is 12 and 15, with 12 being the smallest of the two.	<br/> <span style="border:1px solid gray;padding:5px"><span style="background-color:black; color: white; padding:5px;">12 15</span> 11 7 19 5</span>
+2.	The window slides forward one position revealing the next sub-list of 15 and 11, with 11 being the smallest of the two. 	<span style="border:1px solid gray;padding:5px">12 <span style="background-color:black; color: white; padding:5px;">15 11</span> 7 19 5</span>
+3.	Sliding the window forward one position reveals the next sub-list as 11 and 7, with 7 being the smallest of the two. <br/>	<span style="border:1px solid gray;padding:5px">12 15 <span style="background-color:black; color: white; padding:5px;">11 7</span> 19 5</span>
+4.	Sliding the window forward one position yields the sub-list 7 and 19, with 7 being the smallest of the two.<br/>	<span style="border:1px solid gray;padding:5px">12 15 11 <span style="background-color:black; color: white; padding:5px;">7 19</span> 5</span>
+5.	Sliding the window forward one position yields the sub-list 19 and 5, with 5 being the smallest of the two.<br/>		<span style="border:1px solid gray;padding:5px">12 15 11 7 <span style="background-color:black; color: white; padding:5px;">19 5</span></span>
+
+### Implementation
+
+Implement the solution in the `slidingWindowMin()` method in the Recitiation10 class.  The method should return an array with the sub-list minimum values as explained above.  The size of the array should be exactly equal to the number of sub-lists possible for the given window size.
+
+For example,
+
+```
+Recitation8.slidingWindowMin(new int[] {14, 92, 3, -7, 18, -9, 47, -12}, 4)
+```
+
+should result in an array of length 5 contaning the following,
+
+<p>
+<span style="border:1px black solid;">
+<span style="border-right:1px solid black;">-7</span> <span style="border-right:1px solid black;">-7</span> <span style="border-right:1px solid black;">-9</span> <span style="border-right:1px solid black;">-9</span> -12
+</span>
+</p>
+
+Another example,
+
+```
+Recitation8.slidingWindowMin(new int[] {14, 92, 3, -7}, 4)
+```
+
+should result in an array of length 1 contaning the following,
+
+<p>
+<span style="border:1px black solid;">
+-7
+</span>
+</p>
+
+Finally, for a window size less than or equal to zero (0) or larger than the list size, `slidingWindowMin()` should return an array of length 0!
+
+### Additional Information
+
++ You do not need to verify the correctness of the input.
++ You do not have to handle exceptions.
