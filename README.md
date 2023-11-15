@@ -43,7 +43,7 @@ For Example:
 Recitation8.lastItemReachable(new int[]{5, 3, 2, 1, 0, 2, 3});
 ```
 
-Should result in a <span style="color:blue;">`false`</span>. 
+Should result in a <span style="color:blue;">`true`</span>. 
 
 
 ```
