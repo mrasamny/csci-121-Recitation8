@@ -20,7 +20,7 @@ class Recitation8Test {
         assertTrue(Recitation8.lastItemReachable(hop3));
 
         int[] hop4 = {1, 2, 0, 3, 1, 0};
-        assertFalse(Recitation8.lastItemReachable(hop4));
+        assertTrue(Recitation8.lastItemReachable(hop4));
     }
 
     @Test
